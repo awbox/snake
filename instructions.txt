@@ -1,0 +1,66 @@
+ABOUT THE GAME
+n  the  game  of  Snake,  the  player  uses  the  arrow  keys  to  move  a  "snake" around the board.
+As the snake finds food, it eats the food, and thereby grows larger.
+The  game  ends  when  the  snake  either moves  off  the  screen  or  moves into  itself.
+
+The  goal  is  to  make  the  snake  as  large  as  possible  before  that happens.The player is represented as snake,
+which grows if it eats an apple. The goal of the game is to eat as many apples as possible without colliding into you.
+This is very easy in the early phase of the game but is increasingly more difficult as the length of the snake grows.
+The snake game has some rules:
+1.If the snake eats an apple, the apple moves to a new position.
+2.If the snake eats an apple, the snake’s length grows.
+3.If a snake collapses with itself, game over.
+A  player  object
+can  be  created  and  variables  can  be  modified  using  the movement methods
+
+Using Turle library create modules:
+
+1) Food:
+    Should have listed below ATTRIBUTES:
+        shape('circle')
+        penup()
+        shapesize(stretch_len=0.5, stretch_wid=0.5)
+        color('blue')
+        speed('fastest')
+    METHODS:
+        refresh method to randomly load new food instance.
+2)Scoreboard
+    Should be alined to center and use font 'Courier' fontsize-24 'normal'.
+    Should have listed below ATTRIBUTES:
+        current highscore based on data.txt file.
+        color('white')
+        penup()
+        goto(0, 250)
+        hideturtle()
+        update_scoreboard()
+    METHODS:
+        - update_scoreboard
+        - increase_score
+        - reset
+3)Snake
+To start work faster use given variables with specified values:
+
+STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
+    Should have listed below ATTRIBUTES:
+        -segments,
+        -head
+    METHODS:
+        - create_snake
+        - add segment
+        - extend
+        - move
+        - up
+        - down
+        - left
+        - right
+        - reset
+
+4)data.txt
+    A file on which current highscore will be stored.
+   
