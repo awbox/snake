@@ -1,5 +1,5 @@
 import random
-from turtle import Turtle, addshape
+from turtle import Turtle, addshape, delay, screensize, goto
 
 
 class Snake(Turtle):
@@ -50,7 +50,30 @@ class Snake(Turtle):
         pass
 
     def move(self):
-        pass
+        """
+        Moves snake object forward.
+        :return: None
+        """
+        # while the object is existent
+        while self:
+            # move forward
+            self.forward(Snake.MOVE_DISTANCE)
+            # delay
+            delay(300)
+            # get the screen size as tuple of variables
+            (max_x, max_y) = screensize()
+            # if absolute max_x of the screen is reached
+            if abs(self.xcor()) == max_x:
+                # re-initialize the snake object on the other side
+                pass
+            # likewise, if absolute max_y is reached
+            if abs(self.ycor()) == max_y:
+                # re-initialize the snake object on the other side
+                pass
+
+
+
+
 
     def up(self):
         pass
