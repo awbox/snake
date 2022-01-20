@@ -24,7 +24,6 @@ class Snake(Turtle):
         self.color('green')
         self.penup()
 
-
     @staticmethod
     def create_snake():
         """
@@ -55,37 +54,37 @@ class Snake(Turtle):
         :return: None
         """
         # while the object is existent
-        while self:
-            # move forward
-            self.forward(Snake.MOVE_DISTANCE)
-            # delay
-            delay(300)
-            # get the screen size as tuple of variables
-            (max_x, max_y) = screensize()
-            # if absolute max_x of the screen is reached
-            if abs(self.xcor()) == max_x:
-                # re-initialize the snake object on the other side
-                pass
-            # likewise, if absolute max_y is reached
-            if abs(self.ycor()) == max_y:
-                # re-initialize the snake object on the other side
-                pass
+        # while self:
+        # move forward
+        self.forward(Snake.MOVE_DISTANCE)
+        # delay
+        delay(300)
+        # get the screen size as tuple of variables
+        (max_x, max_y) = screensize()
+        # if absolute max_x of the screen is reached
+        if abs(self.xcor()) == max_x:
+            # re-initialize the snake object on the other side
+            self.setx(-self.xcor())
+        # likewise, if absolute max_y is reached
+        if abs(self.ycor()) == max_y:
+            # re-initialize the snake object on the other side
+            self.sety(-self.ycor())
 
+    def move_up(self):
+        self.setheading(self.UP)
+        self.move()
 
+    def move_down(self):
+        self.setheading(self.DOWN)
+        self.move()
 
+    def move_left(self):
+        self.setheading(self.LEFT)
+        self.move()
 
+    def move_right(self):
+        self.setheading(self.RIGHT)
+        self.move()
 
-    def up(self):
-        pass
-
-    def down(self):
-        pass
-
-    def left(self):
-        pass
-
-    def right(self):
-        pass
-
-    def reset(self):
-        pass
+    def reset_snake(self):
+        self.reset()
