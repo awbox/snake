@@ -1,90 +1,57 @@
 import random
-from turtle import Turtle, addshape, delay, screensize, goto
+from turtle import Turtle, delay, screensize, goto
 
 
-class Snake(Turtle):
+class Snake:
     STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
     MOVE_DISTANCE = 20
     UP = 90
     DOWN = 270
     LEFT = 180
     RIGHT = 0
-    HEADING_OPTIONS = [UP, DOWN, LEFT, RIGHT]
 
-    def __init__(self, head_x=0, head_y=0, segments=4):
-        self.segments = segments
-        self.head_x = head_x
-        self.head_y = head_y
-        poly = ((self.head_x+5, self.head_y),
-                (self.head_x+5, self.head_y+self.segments*10),
-                (self.head_x-5, self.head_y+self.segments*10),
-                (self.head_x-5, self.head_y))
-        addshape('snake', poly)
-        super().__init__(shape='snake')
-        self.color('green')
-        self.penup()
+    def __init__(self):
+        super().__init__()
+        self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]
 
-    @staticmethod
-    def create_snake():
-        """
-        Creates snake instance at one of the defined starting positions,
-        heading towards random choice of heading options
-        :return newly create snake instance
-        """
-        # get new coordinates into x, y variables
-        new_position = random.choice(Snake.STARTING_POSITIONS)
-        x = new_position[0]
-        y = new_position[1]
-        # create Snake instance with given position
-        new_snake = Snake(head_x=x, head_y=y)
-        # set heading of the new instance to one of the heading options
-        new_snake.setheading(random.choice(Snake.HEADING_OPTIONS))
-        # return new snake
-        return new_snake
+    def create_snake(self):
+        for position in Snake.STARTING_POSITIONS:
+            self.add_segment(position)
 
-    def add_segment(self):
-        self.segments += 1
+    def add_segment(self, position):
+        new_segment = Turtle(shape='square')
+        new_segment.color('green')
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
 
     def extend(self):
         pass
 
     def move(self):
-        """
-        Moves snake object forward.
-        :return: None
-        """
-        # while the object is existent
-        # while self:
-        # move forward
-        self.forward(Snake.MOVE_DISTANCE)
-        # delay
-        delay(300)
-        # get the screen size as tuple of variables
-        (max_x, max_y) = screensize()
-        # if absolute max_x of the screen is reached
-        if abs(self.xcor()) == max_x:
-            # re-initialize the snake object on the other side
-            self.setx(-self.xcor())
-        # likewise, if absolute max_y is reached
-        if abs(self.ycor()) == max_y:
-            # re-initialize the snake object on the other side
-            self.sety(-self.ycor())
+        for segment in self.segments:
+            x = segment.xcor()
+            y = segment.ycor()
+            segment.goto(x, y)
+            segment.forward(Snake.MOVE_DISTANCE)
 
     def move_up(self):
-        self.setheading(self.UP)
-        self.move()
+        if self.head.heading() != Snake.DOWN:
+            self.head.setheading(Snake.UP)
 
     def move_down(self):
-        self.setheading(self.DOWN)
-        self.move()
+        if self.head.heading() != Snake.UP:
+            self.head.setheading(Snake.DOWN)
 
     def move_left(self):
-        self.setheading(self.LEFT)
-        self.move()
+        if self.head.heading() != Snake.RIGHT:
+            self.head.setheading(Snake.LEFT)
 
     def move_right(self):
-        self.setheading(self.RIGHT)
-        self.move()
+        if self.head.heading() != Snake.LEFT:
+            self.head.setheading(Snake.RIGHT)
 
-    def reset_snake(self):
-        self.reset()
+    # def reset_snake(self):
+
