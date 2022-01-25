@@ -1,5 +1,4 @@
-import random
-from turtle import Turtle, delay, screensize, goto
+from turtle import Turtle
 
 
 class Snake:
@@ -28,14 +27,14 @@ class Snake:
         self.segments.append(new_segment)
 
     def extend(self):
-        pass
+        current_tail_position = self.segments[-1].position()
+        self.add_segment(current_tail_position)
 
     def move(self):
-        for segment in self.segments:
-            x = segment.xcor()
-            y = segment.ycor()
-            segment.goto(x, y)
-            segment.forward(Snake.MOVE_DISTANCE)
+        copy_segments = self.segments.copy()
+        for i in range(len(copy_segments)-1, 0, -1):
+            self.segments[i].goto(copy_segments[i-1].position())
+        self.head.forward(Snake.MOVE_DISTANCE)
 
     def move_up(self):
         if self.head.heading() != Snake.DOWN:
@@ -52,6 +51,3 @@ class Snake:
     def move_right(self):
         if self.head.heading() != Snake.LEFT:
             self.head.setheading(Snake.RIGHT)
-
-    # def reset_snake(self):
-

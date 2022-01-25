@@ -1,5 +1,5 @@
 import random
-from turtle import Turtle, screensize
+from turtle import Turtle
 
 
 class Food(Turtle):
@@ -19,6 +19,6 @@ class Food(Turtle):
         self.refresh()
 
     def refresh(self):
-        x = random.randrange(-280, 280)
-        y = random.randrange(-280, 280)
+        x = random.randrange(-280, 280, 20)
+        y = random.randrange(-280, 280, 20)
         self.goto(x, y)

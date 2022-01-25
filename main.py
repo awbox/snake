@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
     # initialize screen
     screen = Screen()
-    screen.setup(width=600, height=600)
+    screen.setup(width=700, height=700)
     screen.bgcolor('white')
     screen.tracer(0)
 
@@ -27,15 +27,29 @@ if __name__ == '__main__':
     # while game is on
     game_is_on = True
     while game_is_on:
+
         # Snake object moves
         screen.update()
         snake.move()
         sleep(0.1)
-        # screen object listens to the keyboard input
-        # if Snake's head is in the same spot as Food object instance
-        # Snake object extends (snake eats apple and grows)
-        # score is added
-        # if Snake object's head touches Snake's body
-        # the game is over
-        # score is presented
 
+        # whenever Snake eats Food, it extends,
+        # new food object is generated, score is added
+        if snake.head.distance(food.position()) < 5:
+            snake.extend()
+            scoreboard.increase_score()
+            food.refresh()
+
+        # whenever Snake hits the wall, game is over
+        if (abs(snake.head.xcor()) >= 360) \
+                or abs(snake.head.ycor()) >= 360:
+            game_is_on = False
+
+        # or its own body
+        for segment in snake.segments[2:]:
+            if snake.head.distance(segment.position()) < 0.1:
+                game_is_on = False
+
+    # final score is presented
+    scoreboard.final_score()
+    screen.exitonclick()
