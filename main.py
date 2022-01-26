@@ -51,5 +51,5 @@ if __name__ == '__main__':
                 game_is_on = False
 
     # final score is presented
-    scoreboard.final_score()
+    scoreboard.show_final_score()
     screen.exitonclick()
