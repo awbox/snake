@@ -22,7 +22,7 @@ class Food(Turtle):
         self.speed('fastest')
         self.refresh()
 
-    def refresh(self):
+    def refresh(self) -> None:
         """
         Generates random (x,y) coordinates of the Food object, moves it to the new spot.
         :return: None

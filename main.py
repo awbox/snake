@@ -52,4 +52,7 @@ if __name__ == '__main__':
 
     # final score is presented
     scoreboard.show_final_score()
+
+    # highscore is recorded, game is exited
+    scoreboard.save_highscore()
     screen.exitonclick()

@@ -17,8 +17,8 @@ class Snake:
         head = first segment of the list
     Methods:
         __init__() - define Snake's head and body (segments), then construct snake of segments
+        add_segment(position) - add new segment at a given position (x,y)
         create_snake() - construct snake of segments
-        add_segment() - add new segment at a given position
         extend() - find last segment, add new segment at a given position
         move() - move Snake forward
         move_up() - change direction to Snake.UP
@@ -40,47 +40,51 @@ class Snake:
         self.create_snake()
         self.head = self.segments[0]
 
-    def create_snake(self):
-        """Construct snake of segments."""
-        for position in Snake.STARTING_POSITIONS:
-            self.add_segment(position)
-
-    def add_segment(self, position):
-        """Add new segment at a given position."""
+    def add_segment(self, position: tuple) -> None:
+        """
+        Add new segment at a given position.
+        :param position: tuple of coordinates (x, y)
+        :return: None
+        """
         new_segment = Turtle(shape='square')
         new_segment.color('green')
         new_segment.penup()
         new_segment.goto(position)
         self.segments.append(new_segment)
 
-    def extend(self):
+    def create_snake(self) -> None:
+        """Construct snake of segments."""
+        for position in Snake.STARTING_POSITIONS:
+            self.add_segment(position)
+
+    def extend(self) -> None:
         """Find last segment, add new segment at a given position"""
         current_tail_position = self.segments[-1].position()
         self.add_segment(current_tail_position)
 
-    def move(self):
+    def move(self) -> None:
         """Move Snake forward."""
         copy_segments = self.segments.copy()
         for i in range(len(copy_segments)-1, 0, -1):
             self.segments[i].goto(copy_segments[i-1].position())
         self.head.forward(Snake.MOVE_DISTANCE)
 
-    def move_up(self):
+    def move_up(self) -> None:
         """Change direction to Snake.UP. Do nothing if Snake is moving in opposite direction."""
         if self.head.heading() != Snake.DOWN:
             self.head.setheading(Snake.UP)
 
-    def move_down(self):
+    def move_down(self) -> None:
         """Change direction to Snake.DOWN. Do nothing if Snake is moving in opposite direction."""
         if self.head.heading() != Snake.UP:
             self.head.setheading(Snake.DOWN)
 
-    def move_left(self):
+    def move_left(self) -> None:
         """Change direction to Snake.LEFT. Do nothing if Snake is moving in opposite direction."""
         if self.head.heading() != Snake.RIGHT:
             self.head.setheading(Snake.LEFT)
 
-    def move_right(self):
+    def move_right(self) -> None:
         """Change direction to Snake.RIGHT. Do nothing if Snake is moving in opposite direction."""
         if self.head.heading() != Snake.LEFT:
             self.head.setheading(Snake.RIGHT)
