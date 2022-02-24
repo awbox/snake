@@ -1,5 +1,5 @@
 # SNAKE
-### Snake will eat all the apples in Paradise. 
+### Snake eats all the apples in this Paradise. 
 Snake is a basic version of a legendary game.  Move snake around the window, eat as much apples as you can,  grow bigger and bigger, and avoid eating yourself!  
 
 ## Pre-requisites
